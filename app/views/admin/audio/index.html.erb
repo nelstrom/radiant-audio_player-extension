@@ -27,7 +27,7 @@
         <td>
           <object type="application/x-shockwave-flash" data="/flash/audio_player/player.swf" id="audioplayer<%= audio_track.id %>" height="24" width="290">
           <param name="movie" value="/flash/audio_player/player.swf">
-          <param name="FlashVars" value="playerID=<%= audio_track.id %>&amp;soundFile=<%= audio_track.track.url %>">
+          <param name="FlashVars" value="<%= admin_player_params(audio_track) %>">
           <param name="quality" value="high">
           <param name="menu" value="false">
           <param name="wmode" value="transparent">
