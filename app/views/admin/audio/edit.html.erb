@@ -6,9 +6,15 @@
   <h1>Edit: <%= @audio.title %></h1>
 <% end %>
 
-<% form_tag do %>
+<% form_tag :multipart => true do %>
   <div class="form-area">
     <div  id="audio_form_area">
+
+      <p>
+        <label for="audio_track">Audio file</label>
+        <%= file_field "audio", :track %>
+      </p>
+
       <p class="title">
         <label for="audio_title">Title</label>
         <%= text_field "audio", "title", :class => 'textbox', :maxlength => 255 %>
@@ -18,7 +24,7 @@
         <label for="audio_description">Description</label>
         <%= text_area "audio", "description", :class => 'textbox', :maxlength => 255 %>
       </p>
-
+      
        <span class="clear">&nbsp;</span>
     </div>
   </div>
