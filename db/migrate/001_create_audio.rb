@@ -1,6 +1,6 @@
 class CreateAudio < ActiveRecord::Migration
   def self.up
-    create_table :audios do |t|
+    create_table :audio do |t|
       t.string :title
       t.text :description
       t.string :filter
@@ -10,6 +10,6 @@ class CreateAudio < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :audios
+    drop_table :audio
   end
 end
