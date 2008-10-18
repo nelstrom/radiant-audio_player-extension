@@ -50,3 +50,41 @@
     color:#FF0000;
     padding:0 2px 2px;
 }
+
+/* Reorder stuff */
+.audio_track {
+  font-size: 120%;
+  font-weight: bold;
+  position: relative;
+  padding: 10px;
+  padding-left: 30px;
+  border-top: 1px solid #eaeaea;
+}
+.audio_track .icon {
+  position: absolute;
+  margin-top: -7px;
+  left: 0px;
+}
+ul#audio_tracks,
+ul#audio_tracks li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  cursor: move;
+}
+ul#audio_tracks {
+  border-bottom: 1px solid #eaeaea;
+}
+ul#audio_tracks li {
+  font-size: 105%;
+  font-weight: normal;
+}
+ul#audio_tracks li img{
+  margin: 6px 16px;
+}
+ul.page .icon,
+ul#audio_tracks .icon {
+  position: absolute;
+  margin-top: -7px;
+  left: 22px;
+}

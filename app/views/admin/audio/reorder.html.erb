@@ -1,62 +1,37 @@
+<% include_stylesheet 'admin/audio_player/audio' %>
 <% include_javascript 'dragdrop.js' %>
-<% content_for :page_css do %>
-.page {
-  font-size: 120%;
-  font-weight: bold;
-  position: relative;
-  padding: 10px;
-  padding-left: 30px;
-  border-top: 1px solid #eaeaea;
-}
-.page .icon {
-  position: absolute;
-  margin-top: -7px;
-  left: 0px;
-}
-ul.pages,
-ul.pages li {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  cursor: move;
-}
-ul.pages {
-  border-bottom: 1px solid #eaeaea;
-}
-ul.pages li {
-  font-size: 105%;
-  font-weight: normal;
-}
-ul.pages li img{
-  margin: 6px 16px;
-}
-ul.page .icon,
-ul.pages .icon {
-  position: absolute;
-  margin-top: -7px;
-  left: 22px;
-}
-<% end %>
 
 <h1 id="reorder_pages">Reorder Audio tracks</h1>
 
 <p>Drag and drop tracks to reorder. Click <strong>Finished</strong> when you are done.</p> 
 
-<ul id="children" class="pages">
-<% for child in @audio -%>
-  <li id="item_<%= child.id %>" class="page"><%= image('audio_player/audio') %> <%= child.title %></li>
-<% end -%>
+<ul id="audio_tracks" class="pages">
+  <% for child in @audio -%>
+    <li id="item_<%= child.id %>" class="audio_track">
+      <%= image('audio_player/audio') %>
+      <%= child.title %>
+    </li>
+  <% end -%>
 </ul>
 
 <script type="text/javascript">
 //<![CDATA[
-Sortable.create("children", { onUpdate:function(){ $('sort_order').value = Sortable.sequence('children').join(',') } });
+  Sortable.create("audio_tracks", 
+    { onUpdate:function() { 
+      $('sort_order').value = Sortable.sequence('audio_tracks').join(',') 
+    }
+  });
 //]]>
 </script>
 
 <% form_tag audio_update_order_path do %>
-  <p class="buttons"><%= submit_tag "Finished", :class => 'button' %> 
-  or 
-  <%= link_to 'Cancel', audio_index_path %></p>
+
   <div><%= hidden_field_tag "sort_order" %></div>
+  
+  <p class="buttons">
+    <%= submit_tag "Finished", :class => 'button' %> 
+    or 
+    <%= link_to 'Cancel', audio_index_path %>
+  </p>
+
 <% end %>
