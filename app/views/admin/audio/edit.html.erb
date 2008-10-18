@@ -13,6 +13,9 @@
       <p>
         <label for="audio_track">Audio file</label>
         <%= f.file_field :track %>
+        <% if content_type_error = @audio.errors.on(:track_content_type) %>
+          <small class="error">• <%= content_type_error %></small>
+        <%- end -%>
       </p>
 
       <p class="title">
