@@ -38,7 +38,7 @@ namespace :radiant do
       end
       
       desc "Migrates and copies files in public/admin"
-      task :install => [:create_config_file, :environment, :migrate, :update] do
+      task :install => [:create_config_file, :environment, :update, :migrate] do
         puts "Audio Player extension has been installed."
       end
       

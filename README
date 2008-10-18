@@ -1,3 +1,39 @@
 = Audio Player
 
-Description goes here
+This extension for Radiant adds a Flash audio player plugin which can be embedded on the pages of your site. It adds an "Audio" tab to the admin area, where mp3 files may be uploaded.
+
+
+
+=== Installing for Radiant 0.6.9+
+
+In a terminal, <tt>cd</tt> to the root directory of your Radiant site. Run the following command:
+
+  script/extension install audio_player
+
+Continue by running the rake tasks (see below).
+
+=== Installing for Radiant pre-0.6.9
+
+This extension is hosted on github. If you have git installed, then <tt>cd</tt> to the root of your radiant project and issue this command: 
+
+  git clone git://github.com/nelstrom/radiant-audio_player-extension.git vendor/extensions/audio_player
+
+If you don’t have git, then you can instead download the tarball from this URL:
+
+  http://github.com/nelstrom/radiant-audio_player-extension/tarball/master
+
+and expand the contents to <tt>your-radiant-project/vendor/extensions/audio_player</tt>.
+
+=== Migrate and copy assets into your app
+
+From your radiant application root run the install task:
+
+  rake (production) radiant:extensions:audio_player:install
+  
+  # OR you can run these three tasks in succession:
+  rake radiant:extensions:audio_player:create_config_file
+  rake radiant:extensions:audio_player:update
+  rake (production) radiant:extensions:audio_player:migrate
+
+Restart your server, and you should find that an "Audio" tab has been added to the admin area.
+
