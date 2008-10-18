@@ -1,4 +1,5 @@
 <% include_stylesheet 'admin/audio_player/audio' %>
+<% include_javascript 'audio_player/audio-player' %>
 
 <h1>Audio</h1>
 
@@ -9,6 +10,7 @@
   <thead>
     <tr>
       <th class="audio">Audio</th>
+      <th class="player"></th>
       <th class="modify">Modify</th>
     </tr>
   </thead>
@@ -16,13 +18,26 @@
   <tbody>
     <% @audio.each do |audio_track| %>
       <tr class="node level-1">
+        
         <td class="audio">
           <%= image('audio_player/audio') %>
           <%= link_to audio_track.title, audio_edit_url(:id => audio_track.id) %>
         </td>
+        
+        <td>
+          <object type="application/x-shockwave-flash" data="/flash/audio_player/player.swf" id="audioplayer<%= audio_track.id %>" height="24" width="290">
+          <param name="movie" value="/flash/audio_player/player.swf">
+          <param name="FlashVars" value="playerID=<%= audio_track.id %>&amp;soundFile=<%= audio_track.track.url %>">
+          <param name="quality" value="high">
+          <param name="menu" value="false">
+          <param name="wmode" value="transparent">
+          </object>
+        </td>
+        
         <td class="remove">
           <%= link_to image('remove', :alt => 'Remove audio'), audio_remove_url(:id => audio_track.id) %>
         </td>
+        
       </tr>
     <% end %>
   </tbody>
