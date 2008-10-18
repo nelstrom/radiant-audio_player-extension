@@ -1,3 +1,3 @@
-class Admin::AudioController < ApplicationController
+class Admin::AudioController < Admin::AbstractModelController
   model_class Audio
 end
