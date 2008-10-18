@@ -5,11 +5,11 @@ class AudioPlayerExtension < Radiant::Extension
   
   define_routes do |map|
     # map.connect 'admin/audio_player/:action', :controller => 'admin/audio_player'
-    map.with_options(:controller => 'admin/audio') do |link|
-      link.link_index           'admin/audio',             :action => 'index'
-      link.link_new             'admin/audio/new',         :action => 'new'
-      link.link_edit            'admin/audio/edit/:id',    :action => 'edit'
-      link.link_remove          'admin/audio/remove/:id',  :action => 'remove'
+    map.with_options(:controller => 'admin/audio') do |audio|
+      audio.audio_index           'admin/audio',             :action => 'index'
+      audio.audio_new             'admin/audio/new',         :action => 'new'
+      audio.audio_edit            'admin/audio/edit/:id',    :action => 'edit'
+      audio.audio_remove          'admin/audio/remove/:id',  :action => 'remove'
     end
     
     

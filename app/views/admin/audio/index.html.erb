@@ -1,0 +1,33 @@
+<% include_stylesheet 'admin/audio_player/audio' %>
+
+<h1>Audio</h1>
+
+<p>You can enter audio tracks here.</p>
+
+<table cellspacing="0" cellpadding="0" border="0" class="index" id="audio">
+
+  <thead>
+    <tr>
+      <th class="audio">Audio</th>
+      <th class="modify">Modify</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @audio.each do |audio_track| %>
+    <%# Audio.find(:all).each do |audio_track| %>
+      <tr class="node level-1">
+        <td class="audio">
+          <%= image('audio_player/audio') %>
+          <%= link_to audio_track.title, audio_edit_url(:id => audio_track.id) %>
+        </td>
+        <td class="remove">
+          <%= link_to image('remove', :alt => 'Remove audio'), audio_remove_url(:id => audio_track.id) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+
+</table>
+
+<p><%= link_to image("audio_player/new-audio", :alt => "New audio"), {:action => :new} %></p>
