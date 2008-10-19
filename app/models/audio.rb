@@ -10,5 +10,23 @@ class Audio < ActiveRecord::Base
   validates_uniqueness_of :title, :message => 'name already in use'
   validates_format_of :track_content_type, 
                       :with => /audio\/mpg/,
-                      :message => "must be mp3"
+                      :message => "must be an mp3"
+
+  def to_param
+    [id, slug_from_title(title)].join("-")
+  end
+  
+  def path
+    movie_pages = Page.find_all_by_class_name("AudioPage")
+    return nil unless movie_pages.size == 1
+    movie_page = movie_pages.first
+    path = [movie_page.url, to_param].join()
+  end
+  
+  private
+  
+  def slug_from_title(title)
+    title.downcase.split.join("-")
+  end
+  
 end

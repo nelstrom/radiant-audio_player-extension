@@ -3,7 +3,6 @@
 This extension for Radiant adds a Flash audio player plugin which can be embedded on the pages of your site. It adds an "Audio" tab to the admin area, where mp3 files may be uploaded.
 
 
-
 === Installing for Radiant 0.6.9+
 
 In a terminal, <tt>cd</tt> to the root directory of your Radiant site. Run the following command:
@@ -37,3 +36,7 @@ From your radiant application root run the install task:
 
 Restart your server, and you should find that an "Audio" tab has been added to the admin area.
 
+
+== Credits
+
+The flash player was created by Martin Laine - http://www.1pixelout.net/code/audio-player-wordpress-plugin/
