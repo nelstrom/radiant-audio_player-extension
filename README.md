@@ -22,8 +22,8 @@ Next, run the demo task (optional):
 
 This creates an Audio page, with example usage of the Radius tags provided in this extension.
 
-Instaling without git
----------------------
+Installing without git
+----------------------
 
 If you don’t have git, then you can download the tarball from this URL:
 
