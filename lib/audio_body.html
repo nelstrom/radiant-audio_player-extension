@@ -1,0 +1,36 @@
+<r:audio:script/>
+
+<r:audio:if_index>
+  <ul>
+    <r:audio:each>
+      <li>
+        <r:title/>
+        <r:link>Listen now &gt;</r:link>
+      </li>
+    </r:audio:each>
+  </ul>
+</r:audio:if_index>
+<r:audio:unless_index>
+  <r:track>
+    <h2><r:title/></h2>
+    <div style="margin:10px 0;"><r:player/></div>
+    <r:description/>
+    
+    <div style="text-align:center;position:relative;margin-top:20px;">
+      <r:if_previous>
+        <r:previous>
+          <a href="<r:path/>" title="<r:title/>" style="position:absolute;left:0;text-align:right;display:block;width:25%;">&lt; Previous</a>
+        </r:previous>
+      </r:if_previous>
+      
+      <r:if_next>
+        <r:next>
+          <a href="<r:path/>" title="<r:title/>" style="position:absolute;right:0;display:block;width:25%;">Next &gt;</a>
+        </r:next>
+      </r:if_next>
+      
+      <a href="<r:audio:index_url/>">Show all tracks</a>
+    </div>
+    
+  </r:track>
+</r:audio:unless_index>

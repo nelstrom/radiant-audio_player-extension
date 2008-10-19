@@ -1,6 +1,13 @@
 module AudioTags
   include Radiant::Taggable
   
+  desc %Q{
+    Embed the javascript code which is required to make the Flash player work.
+  }
+  tag 'audio:script' do |tag|
+    %Q{<script type="text/javascript" src="/javascripts/audio_player/audio-player.js"></script>}
+  end
+  
   desc %{The namespace for all audio tags}
   tag 'audio' do |tag|
     tag.expand

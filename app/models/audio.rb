@@ -9,7 +9,7 @@ class Audio < ActiveRecord::Base
   validates_presence_of :title
   validates_uniqueness_of :title, :message => 'name already in use'
   validates_format_of :track_content_type, 
-                      :with => /audio\/mpg/,
+                      :with => /(audio\/mpg)|(application\/x-mp3)/,
                       :message => "must be an mp3"
 
   def to_param

@@ -34,6 +34,15 @@ class AudioPage < Page
     end
   end
   
+  tag 'audio:index_url' do |tag|
+    movie_pages = Page.find_all_by_class_name("AudioPage")
+    if movie_pages.size == 1
+      movie_page = movie_pages.first.url
+    else
+      "You must have exactly 1 Audio page for this tag to work."
+    end
+  end
+  
   desc %{The namespace for an individual audio track}
   tag "track" do |tag|
     tag.locals.audio_track = @audio_track

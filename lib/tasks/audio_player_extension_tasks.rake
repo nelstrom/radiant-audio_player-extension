@@ -42,6 +42,48 @@ namespace :radiant do
         puts "Audio Player extension has been installed."
       end
       
+      desc "Create an example Audio page, with sample mp3."
+      task :demo => :environment do
+        require 'highline/import'
+        say("Choose an available title for your audio page (suggestions: 'Music', 'Songs' or 'Podcasts')")
+        audio_page = title = nil
+        while !audio_page
+          say "* '#{title}' is not available, please choose another title." if title
+          title = prompt_for_title
+          audio_page = create_page_from_title(title)
+        end
+        # Add a body part to the Audio page
+        f = File.new(File.join(File.dirname(__FILE__), '../../', 'lib', "audio_body.html"))
+        body = PagePart.create(:name => "body", :page_id => audio_page.id, :content => f.read)
+        
+        # Create some Audio models, with demo MP3s attached
+        demo = File.new(File.join(File.dirname(__FILE__), '../../', 'demo', "becool.mp3"))
+        Audio.create(:title => "Be cool", :track => demo)
+        
+        say "A demo Audio Page has been created. Check it out: http://localhost:3000/#{audio_page.slug}"
+      end
+      
+      private
+      
+      def prompt_for_title
+        title = ask("Audio page title (Audio): ") do |q|
+          q.whitespace = :strip
+        end
+        title = "Audio" if title.blank?
+        title
+      end
+      
+      def create_page_from_title(title)
+        p = Page.new
+        p.title = p.breadcrumb = title
+        p.slug = title.gsub(/[^-_.a-zA-Z0-9\s]/,"").downcase.split.join("-")
+        p.status_id = 100
+        p.class_name = "AudioPage"
+        p.created_by_id = User.find(:first)
+        p.parent_id = Page.roots.first.id
+        p.save ? p : nil
+      end
+      
     end
   end
 end
