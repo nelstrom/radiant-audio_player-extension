@@ -57,4 +57,54 @@ describe AudioPage do
 </object>})
   end
   
+  # previous/next specs
+  
+  
+  it "should render contents of r:track:if_next when track has a successor" do
+    track = Audio.find_by_title("Debut")
+    virtual_audio_page = Page.find_by_url("/audio/#{track.to_param}")
+    virtual_audio_page.should render('<r:track><r:if_next>YES</r:if_next></r:track>').as('YES')
+  end
+  
+  it "should not render contents of r:track:if_previous when track has no predecessor" do
+    track = Audio.find_by_title("Debut")
+    virtual_audio_page = Page.find_by_url("/audio/#{track.to_param}")
+    virtual_audio_page.should render('<r:track><r:if_previous>hidden</r:if_previous></r:track>').as('')
+  end
+  
+  it "should not render contents of r:track:if_next when track has no successor" do
+    track = Audio.find_by_title("Mostly harmless")
+    virtual_audio_page = Page.find_by_url("/audio/#{track.to_param}")
+    virtual_audio_page.should render('<r:track><r:if_next>hidden</r:if_next></r:track>').as('')
+  end
+  
+  it "should render contents of r:track:if_previous when track has a predecessor" do
+    track = Audio.find_by_title("Mostly harmless")
+    virtual_audio_page = Page.find_by_url("/audio/#{track.to_param}")
+    virtual_audio_page.should render('<r:track><r:if_previous>YES</r:if_previous></r:track>').as('YES')
+  end
+  
+  it "should transfer context to next track with track:next" do
+    track, successor = Audio.find(:all, :order => "position ASC")
+    virtual_audio_page = Page.find_by_url("/audio/#{track.to_param}")
+    virtual_audio_page.should render('<r:track><r:next><r:title/></r:next></r:track>').as(successor.title)
+    virtual_audio_page.should render('<r:track><r:next><r:url/></r:next></r:track>').as(successor.url)
+  end
+  
+  it "should transfer context to previous track with track:previous" do
+    track, predecessor = Audio.find(:all, :order => "position DESC")
+    virtual_audio_page = Page.find_by_url("/audio/#{track.to_param}")
+    virtual_audio_page.should render('<r:track><r:previous><r:title/></r:previous></r:track>').as(predecessor.title)
+    virtual_audio_page.should render('<r:track><r:previous><r:url/></r:previous></r:track>').as(predecessor.url)
+  end
+  
+  
+  # it "should transfer context to next track with track:next, again" do
+  #   track, successor, sucsucsessor = Audio.find(:all, :order => "position ASC")
+  #   virtual_audio_page = Page.find_by_url("/audio/#{track.to_param}")
+  #   virtual_audio_page.should render('<r:track><r:next><r:next><r:title/></r:next></r:next></r:track>').as(sucsucsessor.title)
+  #   virtual_audio_page.should render('<r:track><r:next><r:next><r:url/></r:next></r:next></r:track>').as(sucsucsessor.url)
+  # end
+  
+  
 end

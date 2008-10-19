@@ -67,7 +67,7 @@ class AudioPage < Page
   
   desc %{Shows the url for this audio track (ie, where it can be downloaded from)}
   tag 'track:url' do |tag|
-    tag.locals.audio_track.track.url
+    tag.locals.audio_track.url
   end
   
   desc %{Embed a flash player for this audio track}
@@ -79,6 +79,42 @@ class AudioPage < Page
 <param name="menu" value="false">
 <param name="wmode" value="transparent">
 </object>}
+  end
+  
+  desc %{The contents of this tag are rendered only if this track has a successor}
+  tag "track:if_next" do |tag|
+    tag.locals.next_track = Audio.find(:first, 
+      :conditions => ["position > ?", tag.locals.audio_track.position],
+      :order => "position ASC")
+    tag.expand if tag.locals.next_track
+  end
+  
+  desc %{The contents of this tag are rendered only if this track has a predecessor}
+  tag "track:if_previous" do |tag|
+    tag.locals.previous_track = Audio.find(:first, 
+      :conditions => ["position < ?", tag.locals.audio_track.position], 
+      :order => 'position DESC')
+    tag.expand if tag.locals.previous_track
+  end
+  
+  desc %{Transfers the context to the next track}
+  tag "track:next" do |tag|
+    if next_track = Audio.find(:first, 
+      :conditions => ["position > ?", tag.locals.audio_track.position],
+      :order => 'position ASC')
+      tag.locals.audio_track = next_track
+      tag.expand
+    end
+  end
+  
+  desc %{Transfers the context to the previous track}
+  tag "track:previous" do |tag|
+    if previous_track = Audio.find(:first, 
+      :conditions => ["position < ?", tag.locals.audio_track.position], 
+      :order => 'position DESC')
+      tag.locals.audio_track = previous_track
+      tag.expand
+    end
   end
   
   private

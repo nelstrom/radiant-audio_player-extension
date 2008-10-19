@@ -23,6 +23,10 @@ class Audio < ActiveRecord::Base
     path = [movie_page.url, to_param].join()
   end
   
+  def url
+    track.url
+  end
+  
   private
   
   def slug_from_title(title)
