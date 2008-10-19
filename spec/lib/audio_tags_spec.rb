@@ -4,8 +4,6 @@ describe "Audio tags" do
   scenario :audio_page_scenario
   
   before(:each) do
-    # @audio_track = Audio.find(:first, :order => 'position ASC')
-    # @virtual_audio_page = Page.find_by_url("/audio/#{@audio_track.to_param}")
     @page = pages(:home)
     @audio_tracks = Audio.find(:all, :order => 'position ASC')
   end
@@ -30,12 +28,11 @@ describe "Audio tags" do
   end
   
   it "should find the url for audio tracks with r:link" do
-    @page.should render('<r:audio:each><r:link/> </r:audio:each>').
-      as(%Q{<a href=\"/audio/#{@audio_tracks[0].id}-debut\" title=\"Debut\">Debut</a> <a href=\"/audio/#{@audio_tracks[1].id}-mostly-harmless\" title=\"Mostly harmless\">Mostly harmless</a> })
+    @page.should render('<r:audio:each><r:link/></r:audio:each>').
+      as(@audio_tracks.map{ |track| "<a href=\"/audio/#{track.to_param}\" title=\"#{track.title}\">#{track.title}</a>" }.join)
   end
   
   it "should output code for embedded player with r:track:player" do
-    # debugger
     @page.should render('<r:audio:each><r:player/></r:audio:each>').
       as(@audio_tracks.map{ |track| embed_helper(track) }.join)
   end
