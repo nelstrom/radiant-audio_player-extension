@@ -8,8 +8,9 @@ class Audio < ActiveRecord::Base
   
   validates_presence_of :title
   validates_uniqueness_of :title, :message => 'name already in use'
+  # mp3 MIME types taken from: http://filext.com/file-extension/MP3
   validates_format_of :track_content_type, 
-                      :with => /(audio\/mpg)|(application\/x-mp3)/,
+                      :with => /(audio|application)\/(x-)?(mpe?g|mp3|mpeg3|mpegaudio)/,
                       :message => "must be an mp3"
 
   def to_param
