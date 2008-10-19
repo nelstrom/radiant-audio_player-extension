@@ -6,7 +6,6 @@ class AudioPlayerExtension < Radiant::Extension
   url "http://github.com/nelstrom/radiant-audio_player-extension/tree/master"
 
   define_routes do |map|
-    # map.connect 'admin/audio_player/:action', :controller => 'admin/audio_player'
     map.with_options(:controller => 'admin/audio') do |audio|
       audio.audio_index           'admin/audio',              :action => 'index'
       audio.audio_new             'admin/audio/new',          :action => 'new'
@@ -25,6 +24,8 @@ class AudioPlayerExtension < Radiant::Extension
     end
     load_configuration
     admin.tabs.add "Audio", "/admin/audio", :after => "Layouts", :visibility => [:all]
+    Page.send :include, AudioTags
+    AudioPage
   end
 
   def deactivate
