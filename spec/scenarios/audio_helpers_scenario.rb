@@ -4,7 +4,11 @@ class AudioHelpersScenario < Scenario::Base
   helpers do
     def create_audio(title, attributes={})
       create_record :audio, title.symbolize, audio_params(
-        attributes.reverse_merge(:title => title, :track_content_type => "audio/mpg")
+        attributes.reverse_merge(
+          :title => title, 
+          :track_content_type => "audio/mpg",
+          :track_file_name => "sound_file.mp3"
+        )
       )
     end
     

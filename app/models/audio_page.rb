@@ -72,15 +72,13 @@ class AudioPage < Page
   
   desc %{Embed a flash player for this audio track}
   tag 'track:player' do |tag|
-    %Q{
-      <object type="application/x-shockwave-flash" data="/flash/audio_player/player.swf" id="audioplayer#{tag.locals.audio_track.id}" height="24" width="290">
-      <param name="movie" value="/flash/audio_player/player.swf">
-      <param name="FlashVars" value="#{player_params(tag.locals.audio_track)}">
-      <param name="quality" value="high">
-      <param name="menu" value="false">
-      <param name="wmode" value="transparent">
-      </object>
-    }
+    %Q{<object type="application/x-shockwave-flash" data="/flash/audio_player/player.swf" id="audioplayer#{tag.locals.audio_track.id}" height="24" width="290">
+<param name="movie" value="/flash/audio_player/player.swf">
+<param name="FlashVars" value="#{player_params(tag.locals.audio_track)}">
+<param name="quality" value="high">
+<param name="menu" value="false">
+<param name="wmode" value="transparent">
+</object>}
   end
   
   private
@@ -92,7 +90,6 @@ class AudioPage < Page
     player_prefs.each do |pref|
       player_params << "#{pref.key.sub(/audio_player\.site_/, "")}=#{pref.value}"
     end
-    # debugger
     player_params.join("&amp;")
   end
   
