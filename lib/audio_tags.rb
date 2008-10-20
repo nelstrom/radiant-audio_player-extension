@@ -4,17 +4,17 @@ module AudioTags
   desc %Q{
     Embed the javascript code which is required to make the Flash player work.
   }
-  tag 'audio:script' do |tag|
+  tag 'tracks:script' do |tag|
     %Q{<script type="text/javascript" src="/javascripts/audio_player/audio-player.js"></script>}
   end
   
   desc %{The namespace for all audio tags}
-  tag 'audio' do |tag|
+  tag 'tracks' do |tag|
     tag.expand
   end
   
   desc %{Returns all audio tracks}
-  tag 'audio:each' do |tag|
+  tag 'tracks:each' do |tag|
     audio_tracks = []
     tag.locals.audio_tracks = Audio.find(:all, :order => "position ASC")
     tag.locals.audio_tracks.each do |track|
@@ -26,7 +26,7 @@ module AudioTags
   
   [:title, :description].each do |column|
     desc %{  Renders the `#{column}' attribute of the current audio track.}
-    tag "audio:each:#{column}" do |tag|
+    tag "tracks:each:#{column}" do |tag|
       tag.locals.audio_track[column]
     end
     desc %{  Renders contents unless the `#{column}' attribute is blank.}
@@ -37,7 +37,7 @@ module AudioTags
   
   desc %{
     Embeds the current audio track on the page, using the flash player.}
-  tag 'audio:each:player' do |tag|
+  tag 'tracks:each:player' do |tag|
     %Q{<object type="application/x-shockwave-flash" data="/flash/audio_player/player.swf" id="audioplayer#{tag.locals.audio_track.id}" height="24" width="290">
 <param name="movie" value="/flash/audio_player/player.swf">
 <param name="FlashVars" value="#{player_params(tag.locals.audio_track)}">
@@ -53,7 +53,7 @@ module AudioTags
     Note that this tag will only work if your site has one page of type AudioPage. 
     If you have more than one Audio Page, or no Audio Pages, then this tag won't work.
   }
-  tag 'audio:each:link' do |tag|
+  tag 'tracks:each:link' do |tag|
     track = tag.locals.audio_track
     if path = track.path
       text = tag.double? ? tag.expand : track.title

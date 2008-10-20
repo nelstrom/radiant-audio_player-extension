@@ -17,12 +17,12 @@ describe AudioPage do
   end
   
   it "should be an index page at /audio" do
-    Page.find_by_url('/audio').should render('<r:audio:if_index>YES!</r:audio:if_index>').as('YES!')
-    Page.find_by_url('/audio').should render('<r:audio:unless_index>hidden</r:audio:unless_index>').as('')
+    Page.find_by_url('/audio').should render('<r:tracks:if_index>YES!</r:tracks:if_index>').as('YES!')
+    Page.find_by_url('/audio').should render('<r:tracks:unless_index>hidden</r:tracks:unless_index>').as('')
   end
   it "should not be an index page at /audio/id-slug" do
-    Page.find_by_url("/audio/#{@audio_track.to_param}").should render('<r:audio:if_index>hidden</r:audio:if_index>').as('')
-    Page.find_by_url("/audio/#{@audio_track.to_param}").should render('<r:audio:unless_index>YES!</r:audio:unless_index>').as('YES!')
+    Page.find_by_url("/audio/#{@audio_track.to_param}").should render('<r:tracks:if_index>hidden</r:tracks:if_index>').as('')
+    Page.find_by_url("/audio/#{@audio_track.to_param}").should render('<r:tracks:unless_index>YES!</r:tracks:unless_index>').as('YES!')
   end
   
   it "should show contents of r:track" do

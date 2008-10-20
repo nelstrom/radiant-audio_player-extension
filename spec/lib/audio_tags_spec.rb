@@ -8,32 +8,32 @@ describe "Audio tags" do
     @audio_tracks = Audio.find(:all, :order => 'position ASC')
   end
   
-  it "should render contents of r:audio" do
-    @page.should render('<r:audio>Whatever</r:audio>').as('Whatever')
+  it "should render contents of r:tracks" do
+    @page.should render('<r:tracks>Whatever</r:tracks>').as('Whatever')
   end
   
-  it "should render contents of r:audio:each for each audio track" do
-    @page.should render('<r:audio:each>a </r:audio:each>').as('a a ')
+  it "should render contents of r:tracks:each for each audio track" do
+    @page.should render('<r:tracks:each>a </r:tracks:each>').as('a a ')
   end
   
-  it "should render contents of r:audio:each for each audio track" do
-    @page.should render('<r:audio:each><r:title/> </r:audio:each>').
+  it "should render contents of r:tracks:each for each audio track" do
+    @page.should render('<r:tracks:each><r:title/> </r:tracks:each>').
       as(@audio_tracks.map{ |track| "#{track.title} " }.join)
   end
   
   
-  it "should render description of each audio track with r:audio:each:description" do
-    @page.should render('<r:audio:each><p><r:description/></p></r:audio:each>').
+  it "should render description of each audio track with r:tracks:each:description" do
+    @page.should render('<r:tracks:each><p><r:description/></p></r:tracks:each>').
       as(@audio_tracks.map{ |track| "<p>#{track.description}</p>" }.join)
   end
   
   it "should find the url for audio tracks with r:link" do
-    @page.should render('<r:audio:each><r:link/></r:audio:each>').
+    @page.should render('<r:tracks:each><r:link/></r:tracks:each>').
       as(@audio_tracks.map{ |track| "<a href=\"/audio/#{track.to_param}\" title=\"#{track.title}\">#{track.title}</a>" }.join)
   end
   
   it "should output code for embedded player with r:track:player" do
-    @page.should render('<r:audio:each><r:player/></r:audio:each>').
+    @page.should render('<r:tracks:each><r:player/></r:tracks:each>').
       as(@audio_tracks.map{ |track| embed_helper(track) }.join)
   end
   

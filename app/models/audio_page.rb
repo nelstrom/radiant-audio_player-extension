@@ -19,7 +19,7 @@ class AudioPage < Page
   desc %{
     Usage:
     <pre><code><r:audio:if_index>...</r:audio:if_index></code></pre> }
-  tag "audio:if_index" do |tag|
+  tag "tracks:if_index" do |tag|
     unless @audio_track
       tag.expand
     end
@@ -28,13 +28,13 @@ class AudioPage < Page
   desc %{
     Usage:
     <pre><code><r:audio:unless_index>...</r:audio:unless_index></code></pre> }
-  tag "audio:unless_index" do |tag|
+  tag "tracks:unless_index" do |tag|
     if @audio_track
       tag.expand
     end
   end
   
-  tag 'audio:index_url' do |tag|
+  tag 'tracks:index_url' do |tag|
     movie_pages = Page.find_all_by_class_name("AudioPage")
     if movie_pages.size == 1
       movie_page = movie_pages.first.url
