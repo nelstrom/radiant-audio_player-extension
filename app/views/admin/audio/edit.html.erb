@@ -28,6 +28,13 @@
         <%= f.text_area "description", :class => 'textbox', :maxlength => 255 %>
       </p>
       
+      <p>
+        <label for="audio_filter">Filter:</label>
+        <select name="audio[filter]" id="audio_filter">
+          <%= options_for_select([['none', '']] + TextFilter.descendants.map { |f| f.filter_name }.sort, @audio.filter) %>
+        </select>
+      </p>
+      
        <span class="clear">&nbsp;</span>
     </div>
   </div>
