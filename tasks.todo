@@ -1,1 +1,5 @@
-- apply a filter to description
+- each tag options:
+  - order (date, title, position)
+  - limit/offset
+
+- find a movie by id/title
