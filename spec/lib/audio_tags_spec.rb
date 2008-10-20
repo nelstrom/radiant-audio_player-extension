@@ -13,7 +13,7 @@ describe "Audio tags" do
   end
   
   it "should render contents of r:tracks:each for each audio track" do
-    @page.should render('<r:tracks:each>a </r:tracks:each>').as('a a ')
+    @page.should render('<r:tracks:each>a </r:tracks:each>').as('a a a ')
   end
   
   it "should render contents of r:tracks:each for each audio track" do

@@ -6,6 +6,7 @@ class AudioPageScenario < Scenario::Base
     
     create_audio "Debut", :description => "Her first recording."
     create_audio "Mostly harmless", :description => "Fourth in the trilogy"
+    create_audio "Richly described", :description => "How *do* you do?", :filter => "Textile"
   end
   
 end

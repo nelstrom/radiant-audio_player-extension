@@ -66,7 +66,12 @@ class AudioPage < Page
   
   desc %{Renders the description of the current audio track}
   tag "track:description" do |tag|
-    tag.locals.audio_track.description
+    if filter_name = tag.locals.audio_track.filter
+      filter = TextFilter.descendants.find { |f| f.filter_name == filter_name }
+      filter.filter(tag.locals.audio_track.description)
+    else
+      tag.locals.audio_track.description
+    end
   end
   
   desc %{Shows the path for this audio track}

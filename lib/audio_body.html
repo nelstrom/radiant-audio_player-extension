@@ -1,16 +1,16 @@
-<r:audio:script/>
+<r:tracks:script/>
 
-<r:audio:if_index>
+<r:tracks:if_index>
   <ul>
-    <r:audio:each>
+    <r:tracks:each>
       <li>
         <r:title/>
         <r:link>Listen now &gt;</r:link>
       </li>
-    </r:audio:each>
+    </r:tracks:each>
   </ul>
-</r:audio:if_index>
-<r:audio:unless_index>
+</r:tracks:if_index>
+<r:tracks:unless_index>
   <r:track>
     <h2><r:title/></h2>
     <div style="margin:10px 0;"><r:player/></div>
@@ -29,8 +29,8 @@
         </r:next>
       </r:if_next>
       
-      <a href="<r:audio:index_url/>">Show all tracks</a>
+      <a href="<r:tracks:index_url/>">Show all tracks</a>
     </div>
     
   </r:track>
-</r:audio:unless_index>
+</r:tracks:unless_index>

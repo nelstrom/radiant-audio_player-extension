@@ -37,6 +37,12 @@ describe AudioPage do
     @virtual_audio_page.should render('<r:track><r:description/></r:track>').as('Her first recording.')
   end
   
+  it "should use specified filter for description" do
+    audio_track = Audio.find_by_title("Richly described")
+    virtual_audio_page = Page.find_by_url("/audio/#{audio_track.to_param}")
+    virtual_audio_page.should render('<r:track><r:description/></r:track>').as("<p>How <strong>do</strong> you do?</p>")
+  end
+  
   it "should show url with r:track:url" do
     @virtual_audio_page.should render('<r:track><r:url/></r:track>').
       as("/audio/#{@audio_track.id}/#{@audio_track.track_file_name}")
@@ -73,7 +79,7 @@ describe AudioPage do
   end
   
   it "should not render contents of r:track:if_next when track has no successor" do
-    track = Audio.find_by_title("Mostly harmless")
+    track = Audio.find_by_title("Richly described")
     virtual_audio_page = Page.find_by_url("/audio/#{track.to_param}")
     virtual_audio_page.should render('<r:track><r:if_next>hidden</r:if_next></r:track>').as('')
   end
@@ -99,12 +105,12 @@ describe AudioPage do
   end
   
   
-  # it "should transfer context to next track with track:next, again" do
-  #   track, successor, sucsucsessor = Audio.find(:all, :order => "position ASC")
-  #   virtual_audio_page = Page.find_by_url("/audio/#{track.to_param}")
-  #   virtual_audio_page.should render('<r:track><r:next><r:next><r:title/></r:next></r:next></r:track>').as(sucsucsessor.title)
-  #   virtual_audio_page.should render('<r:track><r:next><r:next><r:url/></r:next></r:next></r:track>').as(sucsucsessor.url)
-  # end
+  it "should transfer context to next track with track:next, again" do
+    track, successor, sucsucsessor = Audio.find(:all, :order => "position ASC")
+    virtual_audio_page = Page.find_by_url("/audio/#{track.to_param}")
+    virtual_audio_page.should render('<r:track><r:next><r:next><r:title/></r:next></r:next></r:track>').as(sucsucsessor.title)
+    virtual_audio_page.should render('<r:track><r:next><r:next><r:url/></r:next></r:next></r:track>').as(sucsucsessor.url)
+  end
   
   
 end
