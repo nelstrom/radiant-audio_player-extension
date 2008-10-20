@@ -24,6 +24,15 @@ class Audio < ActiveRecord::Base
     path = [movie_page.url, to_param].join()
   end
   
+  def description_with_filter
+    if filter
+      f = TextFilter.descendants.find { |tf| tf.filter_name == filter }
+      f.filter(description)
+    else
+      description
+    end
+  end
+  
   def url
     track.url
   end

@@ -24,11 +24,17 @@ module AudioTags
     audio_tracks
   end
   
+  desc %{  Renders the title of the current audio track.}
+  tag "tracks:each:title" do |tag|
+    tag.locals.audio_track.title
+  end
+  
+  desc %{  Renders the title of the current audio track.}
+  tag "tracks:each:description" do |tag|
+    tag.locals.audio_track.description_with_filter
+  end
+  
   [:title, :description].each do |column|
-    desc %{  Renders the `#{column}' attribute of the current audio track.}
-    tag "tracks:each:#{column}" do |tag|
-      tag.locals.audio_track[column]
-    end
     desc %{  Renders contents unless the `#{column}' attribute is blank.}
     tag "movies:each:if_#{column}" do |tag|
       tag.expand unless tag.locals.audio_track[column].blank?

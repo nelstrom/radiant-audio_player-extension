@@ -23,8 +23,8 @@ describe "Audio tags" do
   
   
   it "should render description of each audio track with r:tracks:each:description" do
-    @page.should render('<r:tracks:each><p><r:description/></p></r:tracks:each>').
-      as(@audio_tracks.map{ |track| "<p>#{track.description}</p>" }.join)
+    @page.should render('<r:tracks:each><r:description/></r:tracks:each>').
+      as(@audio_tracks.map{ |track| "#{track.description_with_filter}" }.join)
   end
   
   it "should find the url for audio tracks with r:link" do
