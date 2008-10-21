@@ -48,47 +48,7 @@ class AudioPage < Page
     tag.locals.audio_track = @audio_track
     tag.expand
   end
-  
-  desc %{Renders the title of the current audio track}
-  tag "track:title" do |tag|
-    tag.locals.audio_track.title
-  end
-  
-  desc %{Renders the tag contents only if the description is not blank}
-  tag "track:if_description" do |tag|
-    tag.expand unless tag.locals.audio_track.description.blank?
-  end
-  
-  desc %{Renders the tag contents only if the description is blank}
-  tag "track:unless_description" do |tag|
-    tag.expand if tag.locals.audio_track.description.blank?
-  end
-  
-  desc %{Renders the description of the current audio track}
-  tag "track:description" do |tag|
-    tag.locals.audio_track.description_with_filter
-  end
-  
-  desc %{Shows the path for this audio track}
-  tag "track:path" do |tag|
-    tag.locals.audio_track.path
-  end
-  
-  desc %{Shows the url for this audio track (ie, where it can be downloaded from)}
-  tag 'track:url' do |tag|
-    tag.locals.audio_track.url
-  end
-  
-  desc %{Embed a flash player for this audio track}
-  tag 'track:player' do |tag|
-    %Q{<object type="application/x-shockwave-flash" data="/flash/audio_player/player.swf" id="audioplayer#{tag.locals.audio_track.id}" height="24" width="290">
-<param name="movie" value="/flash/audio_player/player.swf">
-<param name="FlashVars" value="#{player_params(tag.locals.audio_track)}">
-<param name="quality" value="high">
-<param name="menu" value="false">
-<param name="wmode" value="transparent">
-</object>}
-  end
+
   
   desc %{The contents of this tag are rendered only if this track has a successor}
   tag "track:if_next" do |tag|

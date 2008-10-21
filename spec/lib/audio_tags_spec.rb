@@ -12,6 +12,35 @@ describe "Audio tags" do
     @page.should render('<r:tracks>Whatever</r:tracks>').as('Whatever')
   end
   
+  # finding a particular track
+  
+  it "should find an audio track when given its id" do
+    target = Audio.find(:first)
+    @page.should render(%Q{<r:track id="#{target.id}"><r:title/></r:track>}).
+      as(target.title)
+  end
+  
+  it "should find an audio track when given an existing title" do
+    target = Audio.find(:first)
+    @page.should render(%Q{<r:track title="#{target.title}"><r:title/></r:track>}).
+      as(target.title)
+  end
+  
+  it "should show nothing when given a non-existing title" do
+    target = Audio.find(:first)
+    @page.should render(%Q{<r:track title="#{target.title}... not!"><r:title/></r:track>}).
+      as('')
+  end
+  
+  it "should show nothing when given an id for a non-existent audio track" do
+    # assuming that sample records are created with large value ids, 
+    # a low value id should match nothing.
+    @page.should render(%Q{<r:track id="42"><r:title/></r:track>}).
+      as('')
+  end
+  
+  # iterating through audio tracks
+  
   it "should render contents of r:tracks:each for each audio track" do
     @page.should render('<r:tracks:each>a </r:tracks:each>').as('a a a ')
   end
