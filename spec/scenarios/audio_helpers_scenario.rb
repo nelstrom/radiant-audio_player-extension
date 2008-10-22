@@ -14,11 +14,11 @@ class AudioHelpersScenario < Scenario::Base
     
     def audio_params(attributes={})
       title = attributes[:title] || unique_audio_title
-      position = audio_track_position
       { 
         :title => title,
         :description => "Description of your audio track here",
-        :position => position
+        :position => audio_track_position,
+        :created_at => audio_track_creation_time
       }.merge(attributes)
     end
     
@@ -26,6 +26,12 @@ class AudioHelpersScenario < Scenario::Base
     @@no_of_audio_tracks = 0
     def audio_track_position
       @@no_of_audio_tracks += 1
+    end
+    
+    @@audio_track_creation_time_call_count = 0
+    def audio_track_creation_time
+      @@audio_track_creation_time_call_count += 1
+      @@audio_track_creation_time_call_count.days.ago
     end
     
     @@unique_audio_title_call_count = 0
