@@ -24,7 +24,10 @@ module AudioTags
     audio_tracks
   end
   
-  desc %{Find a track, by passing its id or title. This allows you to embed any audio track on any page of your choice, rather than depending on the Audio Page type.}
+  desc %{Find a track, by passing its id or title. This allows you to embed any audio track on any page of your choice, rather than depending on the Audio Page type.
+    
+    Note that this tag can be called from any page, with the attributes @id@ and @title@. In the context of a virtual child of AudioPage, the @<r:track/> tag will fetch the audio track based on the URL, disregrading any passed attributes.
+    }
   tag 'track' do |tag|
     if tag.attr["id"] or tag.attr["title"]
       if id = tag.attr["id"]
@@ -108,6 +111,17 @@ module AudioTags
       end
     end
     
+  end
+  
+  
+  
+  tag 'tracks:index_url' do |tag|
+    movie_pages = Page.find_all_by_class_name("AudioPage")
+    if movie_pages.size == 1
+      movie_page = movie_pages.first.url
+    else
+      "You must have exactly 1 Audio page for this tag to work."
+    end
   end
   
   private

@@ -18,10 +18,14 @@ describe AudioPage do
   
   it "should be an index page at /audio" do
     Page.find_by_url('/audio').should render('<r:tracks:if_index>YES!</r:tracks:if_index>').as('YES!')
+    Page.find_by_url('/audio').should render('<r:tracks:unless_show>YES!</r:tracks:unless_show>').as('YES!')
     Page.find_by_url('/audio').should render('<r:tracks:unless_index>hidden</r:tracks:unless_index>').as('')
+    Page.find_by_url('/audio').should render('<r:tracks:if_show>hidden</r:tracks:if_show>').as('')
   end
   it "should not be an index page at /audio/id-slug" do
     Page.find_by_url("/audio/#{@audio_track.to_param}").should render('<r:tracks:if_index>hidden</r:tracks:if_index>').as('')
+    Page.find_by_url("/audio/#{@audio_track.to_param}").should render('<r:tracks:unless_show>hidden</r:tracks:unless_show>').as('')
+    Page.find_by_url("/audio/#{@audio_track.to_param}").should render('<r:tracks:if_show>YES!</r:tracks:if_show>').as('YES!')
     Page.find_by_url("/audio/#{@audio_track.to_param}").should render('<r:tracks:unless_index>YES!</r:tracks:unless_index>').as('YES!')
   end
   

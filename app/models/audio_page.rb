@@ -16,34 +16,27 @@ class AudioPage < Page
     end
   end
   
-  desc %{
-    Usage:
-    <pre><code><r:audio:if_index>...</r:audio:if_index></code></pre> }
-  tag "tracks:if_index" do |tag|
-    unless @audio_track
-      tag.expand
+  ["if_index", "unless_show"].each do |condition|
+    desc %{ The contents of this tag are rendered only when this AudioPage is
+      being called in the context of an index page. E.g. path: /audio/ }
+    tag "tracks:#{condition}" do |tag|
+      unless @audio_track
+        tag.expand
+      end
     end
   end
   
-  desc %{
-    Usage:
-    <pre><code><r:audio:unless_index>...</r:audio:unless_index></code></pre> }
-  tag "tracks:unless_index" do |tag|
-    if @audio_track
-      tag.expand
+  ["unless_index", "if_show"].each do |condition|
+    desc %{ The contents of this tag are rendered only in the context of this
+      AudioPage as a "Show" page. E.g. when the path is: /audio/1_episode-one/ }
+    tag "tracks:#{condition}" do |tag|
+      if @audio_track
+        tag.expand
+      end
     end
   end
   
-  tag 'tracks:index_url' do |tag|
-    movie_pages = Page.find_all_by_class_name("AudioPage")
-    if movie_pages.size == 1
-      movie_page = movie_pages.first.url
-    else
-      "You must have exactly 1 Audio page for this tag to work."
-    end
-  end
-  
-  desc %{The namespace for an individual audio track}
+  desc %{The namespace for an individual audio track.}
   tag "track" do |tag|
     tag.locals.audio_track = @audio_track
     tag.expand
