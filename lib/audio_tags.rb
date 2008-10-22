@@ -8,6 +8,22 @@ module AudioTags
     %Q{<script type="text/javascript" src="/javascripts/audio_player/audio-player.js"></script>}
   end
   
+  desc %{The namespace for all audio tags}
+  tag 'tracks' do |tag|
+    tag.expand
+  end
+  
+  desc %{Returns all audio tracks}
+  tag 'tracks:each' do |tag|
+    audio_tracks = []
+    tag.locals.audio_tracks = Audio.find(:all, :order => "position ASC")
+    tag.locals.audio_tracks.each do |track|
+      tag.locals.audio_track = track
+      audio_tracks << tag.expand
+    end
+    audio_tracks
+  end
+  
   desc %{Find a track, by passing its id or title. This allows you to embed any audio track on any page of your choice, rather than depending on the Audio Page type.}
   tag 'track' do |tag|
     if tag.attr["id"] or tag.attr["title"]
@@ -27,8 +43,10 @@ module AudioTags
     end
   end
   
-  # ------------
-  
+  # the following tags can all be accessed from the context of track or tracks:each
+  # e.g. the following two examples should work:
+  # <r:track id="1"/><r:title/></r:track> 
+  # <r:tracks:each><r:title/></r:tracks:each>
   ["track", "tracks:each"].each do |context|
     
     [:title, :description].each do |column|
@@ -90,24 +108,6 @@ module AudioTags
       end
     end
     
-  end
-  
-  # ------------
-  
-  desc %{The namespace for all audio tags}
-  tag 'tracks' do |tag|
-    tag.expand
-  end
-  
-  desc %{Returns all audio tracks}
-  tag 'tracks:each' do |tag|
-    audio_tracks = []
-    tag.locals.audio_tracks = Audio.find(:all, :order => "position ASC")
-    tag.locals.audio_tracks.each do |track|
-      tag.locals.audio_track = track
-      audio_tracks << tag.expand
-    end
-    audio_tracks
   end
   
   private
