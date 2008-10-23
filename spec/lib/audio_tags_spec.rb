@@ -77,6 +77,18 @@ describe "Audio tags" do
       as("Debut Mostly harmless Richly described ")
   end
   
+  # limit and offset when fetching a collection
+  
+  it "should only fetch the first 2 results" do
+    @page.should render('<r:tracks:each limit="2"><r:title/> </r:tracks:each>').
+      as(@audio_tracks[0..1].map{ |track| "#{track.title} " }.join)
+  end
+  it "should skip the first track with offset of 1" do
+    @page.should render('<r:tracks:each limit="2" offset="1"><r:title/> </r:tracks:each>').
+      as(@audio_tracks[1..2].map{ |track| "#{track.title} " }.join)
+  end
+  
+  
   # Fetching attributes of each track whilst iterating through them
   
   it "should render description of each audio track with r:tracks:each:description" do
