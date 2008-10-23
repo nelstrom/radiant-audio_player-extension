@@ -20,7 +20,6 @@ module AudioTags
     tag.attr["by"] ||= "position"
     tag.attr["order"] ||= "asc"
     options = audio_find_options(tag)
-    # debugger
     audio_tracks = []
     tag.locals.audio_tracks = Audio.find(:all, options)
     tag.locals.audio_tracks.each do |track|
