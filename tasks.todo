@@ -1,7 +1,1 @@
-- each tag options:
-  - order (date, title, position)
-  - limit/offset
-
-- find a movie by id/title
-
 - move player customisations from config/audio_player.yml to user interface.
