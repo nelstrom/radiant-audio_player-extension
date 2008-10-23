@@ -1,1 +1,27 @@
 - move player customisations from config/audio_player.yml to user interface.
+
+Create an AudioPlayer object, to hold customisations.
+
+When calling track:audio_player, allow selection of player by id/name (with default fallback)
+
+If no AudioPlayers exist in db, just use defaults (i.e. don't specify)
+
+Get rid of:
+- config/audio_player.yml
+- load_configuration action during activation.
+
+
+bg: "0xf8f8f8"
+leftbg: "0xeeeeee"
+lefticon: "0x666666"
+rightbg: "0xcccccc"
+rightbghover: "0x999999"
+righticon: "0x666666"
+righticonhover: "0xffffff"
+text: "0x666666"
+slider: "0x666666"
+track: "0xFFFFFF"
+border: "0x666666"
+loader: "0x9FFFB8"
+loop: "no"
+autostart: "no"
