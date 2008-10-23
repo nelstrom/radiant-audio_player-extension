@@ -1,7 +1,11 @@
 Audio Player
 ============
 
-This extension for Radiant adds a Flash audio player plugin which can be embedded on the pages of your site. It adds an "Audio" tab to the admin area, where mp3 files may be uploaded.
+This extension for Radiant adds a Flash audio player plugin which can be embedded on the pages of your site. It adds an "Audio" tab to the admin area, where mp3 files may be uploaded. 
+
+Suggested uses: publishing a podcast, or portfolio of music.
+
+This is a standalone extension. It does not depend on any other asset management extensions, but neither should it cause any conflict if you do have such an extension installed.
 
 Installation
 ------------
