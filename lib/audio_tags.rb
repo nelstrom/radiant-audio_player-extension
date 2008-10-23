@@ -15,10 +15,6 @@ module AudioTags
   
   desc %{Returns all audio tracks}
   tag 'tracks:each' do |tag|
-    # when overriding tag.attr, be sure to use "string" not :symbol as key
-    # (attr[:by] does not overwrite attr["by"] ! )
-    tag.attr["by"] ||= "position"
-    tag.attr["order"] ||= "asc"
     options = audio_find_options(tag)
     audio_tracks = []
     tag.locals.audio_tracks = Audio.find(:all, options)
@@ -143,7 +139,7 @@ module AudioTags
   
   def audio_find_options(tag)
     attr = tag.attr.symbolize_keys
-    
+      
     options = {}
     
     [:limit, :offset].each do |symbol|
@@ -156,11 +152,9 @@ module AudioTags
       end
     end
     
-    by = (attr[:by] || 'published_at').strip
+    by = (attr[:by] || 'position').strip
     order = (attr[:order] || 'asc').strip
     order_string = ''
-    # debugger
-    # if self.attributes.keys.include?(by)
     if Audio.column_names.include?(by)
       order_string << by
     else
@@ -172,18 +166,6 @@ module AudioTags
       raise TagError.new(%{`order' attribute of `each' tag must be set to either "asc" or "desc"})
     end
     options[:order] = order_string
-    
-    status = (attr[:status] || 'published').downcase
-    # unless status == 'all'
-    #   stat = Status[status]
-    #   unless stat.nil?
-    #     options[:conditions] = ["(virtual = ?) and (status_id = ?)", false, stat.id]
-    #   else
-    #     raise TagError.new(%{`status' attribute of `each' tag must be set to a valid status})
-    #   end
-    # else
-    #   options[:conditions] = ["virtual = ?", false]
-    # end
     options
   end
   
