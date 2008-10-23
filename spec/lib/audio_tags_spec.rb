@@ -45,11 +45,39 @@ describe "Audio tags" do
     @page.should render('<r:tracks:each>a </r:tracks:each>').as('a a a ')
   end
   
+  # ordering of audio tracks
+  
   it "should render contents of r:tracks:each for each audio track" do
     @page.should render('<r:tracks:each><r:title/> </r:tracks:each>').
       as(@audio_tracks.map{ |track| "#{track.title} " }.join)
   end
   
+  it "should render contents of r:tracks:each for each audio track" do
+    @page.should render('<r:tracks:each order="desc"><r:title/> </r:tracks:each>').
+      as(@audio_tracks.reverse.map{ |track| "#{track.title} " }.join)
+  end
+  
+  it "should render contents of r:tracks:each for each audio track" do
+    @page.should render('<r:tracks:each by="title"><r:title/> </r:tracks:each>').
+      as("Debut Mostly harmless Richly described ")
+  end
+  
+  it "should render contents of r:tracks:each for each audio track" do
+    @page.should render('<r:tracks:each by="title" order="desc"><r:title/> </r:tracks:each>').
+      as("Richly described Mostly harmless Debut ")
+  end
+  
+  it "should render contents of r:tracks:each for each audio track" do
+    @page.should render('<r:tracks:each by="created_at"><r:title/> </r:tracks:each>').
+      as("Richly described Mostly harmless Debut ")
+  end
+  
+  it "should render contents of r:tracks:each for each audio track" do
+    @page.should render('<r:tracks:each by="created_at" order="desc"><r:title/> </r:tracks:each>').
+      as("Debut Mostly harmless Richly described ")
+  end
+  
+  # Fetching attributes of each track whilst iterating through them
   
   it "should render description of each audio track with r:tracks:each:description" do
     @page.should render('<r:tracks:each><r:description/></r:tracks:each>').
