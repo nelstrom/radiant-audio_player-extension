@@ -7,7 +7,7 @@ class AudioPlayerConfig < ActiveRecord::Base
     parameters.each do |key,value|
       pa << "#{key}=#{value}"
     end
-    pa.join("&amp;")
+    pa
   end
   
   def parameters
