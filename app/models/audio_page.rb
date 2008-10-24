@@ -82,12 +82,12 @@ class AudioPage < Page
   private
   
   def player_params(audio_track)
-    player_prefs = Radiant::Config.find(:all, 
-      :conditions => ["config.key LIKE ?", "audio_player.site%"] )
-    player_params = ["playerID=#{audio_track.id}","soundFile=#{audio_track.track.url}"]
-    player_prefs.each do |pref|
-      player_params << "#{pref.key.sub(/audio_player\.site_/, "")}=#{pref.value}"
+    if config = AudioPlayerConfig.find_by_name("Site")
+      player_params = config.parameters_for_player
+    else
+      player_params = ["autostart=no","loop=no"]
     end
+    player_params += ["playerID=#{audio_track.id}","soundFile=#{audio_track.track.url}"]
     player_params.join("&amp;")
   end
   

@@ -111,7 +111,7 @@ describe "Audio tags" do
   def embed_helper(audio_track)
     %Q{<object type=\"application/x-shockwave-flash\" data=\"/flash/audio_player/player.swf\" id=\"audioplayer#{audio_track.id}\" height=\"24\" width=\"290\">
 <param name=\"movie\" value=\"/flash/audio_player/player.swf\">
-<param name=\"FlashVars\" value=\"playerID=#{audio_track.id}&amp;soundFile=/audio/#{audio_track.id}/#{audio_track.track_file_name}&amp;lefticon=0x666666&amp;autostart=no&amp;loader=0x9FFFB8&amp;text=0x666666&amp;track=0xFFFFFF&amp;border=0x666666&amp;slider=0x666666&amp;rightbg=0xcccccc&amp;leftbg=0xeeeeee&amp;bg=0xf8f8f8&amp;righticonhover=0xffffff&amp;loop=no&amp;rightbghover=0x999999&amp;righticon=0x666666\">
+<param name=\"FlashVars\" value=\"autostart=no&amp;loop=no&amp;playerID=#{audio_track.id}&amp;soundFile=/audio/#{audio_track.id}/#{audio_track.track_file_name}\">
 <param name=\"quality\" value=\"high\">
 <param name=\"menu\" value=\"false\">
 <param name=\"wmode\" value=\"transparent\">

@@ -88,12 +88,12 @@ module AudioTags
     desc %{Embed a flash player for this audio track}
     tag "#{context}:player" do |tag|
       %Q{<object type="application/x-shockwave-flash" data="/flash/audio_player/player.swf" id="audioplayer#{tag.locals.audio_track.id}" height="24" width="290">
-  <param name="movie" value="/flash/audio_player/player.swf">
-  <param name="FlashVars" value="#{player_params(tag.locals.audio_track)}">
-  <param name="quality" value="high">
-  <param name="menu" value="false">
-  <param name="wmode" value="transparent">
-  </object>}
+<param name="movie" value="/flash/audio_player/player.swf">
+<param name="FlashVars" value="#{player_params(tag.locals.audio_track)}">
+<param name="quality" value="high">
+<param name="menu" value="false">
+<param name="wmode" value="transparent">
+</object>}
     end
     
     desc %{
@@ -128,12 +128,12 @@ module AudioTags
   private
   
   def player_params(audio_track)
-    player_prefs = Radiant::Config.find(:all, 
-      :conditions => ["config.key LIKE ?", "audio_player.site%"] )
-    player_params = ["playerID=#{audio_track.id}","soundFile=#{audio_track.track.url}"]
-    player_prefs.each do |pref|
-      player_params << "#{pref.key.sub(/audio_player\.site_/, "")}=#{pref.value}"
+    if config = AudioPlayerConfig.find_by_name("Site")
+      player_params = config.parameters_for_player
+    else
+      player_params = ["autostart=no","loop=no"]
     end
+    player_params += ["playerID=#{audio_track.id}","soundFile=#{audio_track.track.url}"]
     player_params.join("&amp;")
   end
   
