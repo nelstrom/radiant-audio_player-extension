@@ -1,5 +1,9 @@
+Config form:
+- accept #000 or #000000 or 0xaabbcc formats
+
+
+
 Get rid of:
 - config/audio_player.yml
-- load_configuration action during activation.
+✓ load_configuration action during activation.
 
-- move player customisations from config/audio_player.yml to user interface.
