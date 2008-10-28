@@ -1,5 +1,5 @@
 Config form:
-- accept #000 or #000000 or 0xaabbcc formats
+✓ accept #000 or #000000 or 0xaabbcc formats
 
 
 
@@ -7,3 +7,10 @@ Get rid of:
 - config/audio_player.yml
 ✓ load_configuration action during activation.
 
+
+
+         
+:leftbg       x     :rightbg          :rightbghover 
+:lefticon     x     :righticon        :righticonhover
+:bg                 :border           :text
+:track              :loader           :slider
