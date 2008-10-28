@@ -48,3 +48,8 @@
   <%= link_to image("audio_player/new-audio", :alt => "New audio"), {:action => :new} %>
   <%= link_to image("audio_player/reorder", :alt => "Reorder"), {:action => :reorder} %>
 </p>
+<p>
+  Configure audio player for 
+    <%= link_to "admin", audio_player_config_edit_path(1) %> or
+    <%= link_to "site", audio_player_config_edit_path(2) %>
+</p>

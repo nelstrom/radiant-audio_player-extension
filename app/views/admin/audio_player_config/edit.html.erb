@@ -1,0 +1,92 @@
+<% include_stylesheet 'admin/audio_player/audio' %>
+
+<% if @audio_player_config.new_record? %>
+  <h1>New audio player</h1>
+<% else %>
+  <h1>Edit: <%= @audio_player_config.name %></h1>
+<% end %>
+
+<% form_for :audio_player_config do |f| %>
+  <div class="form-area">
+    <div id="audio_player_config_form_area">
+      
+      <p>
+        <label for="audio_player_config_bg">bg</label>
+        <%= f.text_field "bg", :class => 'textbox', :maxlength => 10 %>
+      </p>
+      <p>
+        <label for="audio_player_config_leftbg">leftbg</label>
+        <%= f.text_field "leftbg", :class => 'textbox', :maxlength => 10 %>
+      </p>
+      <p>
+        <label for="audio_player_config_lefticon">lefticon</label>
+        <%= f.text_field "lefticon", :class => 'textbox', :maxlength => 10 %>
+      </p>
+      <p>
+        <label for="audio_player_config_rightbg">rightbg</label>
+        <%= f.text_field "rightbg", :class => 'textbox', :maxlength => 10 %>
+      </p>
+      <p>
+        <label for="audio_player_config_rightbghover">rightbghover</label>
+        <%= f.text_field "rightbghover", :class => 'textbox', :maxlength => 10 %>
+      </p>
+      <p>
+        <label for="audio_player_config_righticon">righticon</label>
+        <%= f.text_field "righticon", :class => 'textbox', :maxlength => 10 %>
+      </p>
+      <p>
+        <label for="audio_player_config_righticonhover">righticonhover</label>
+        <%= f.text_field "righticonhover", :class => 'textbox', :maxlength => 10 %>
+      </p>
+      <p>
+        <label for="audio_player_config_text">text</label>
+        <%= f.text_field "text", :class => 'textbox', :maxlength => 10 %>
+      </p>
+      <p>
+        <label for="audio_player_config_slider">slider</label>
+        <%= f.text_field "slider", :class => 'textbox', :maxlength => 10 %>
+      </p>
+      <p>
+        <label for="audio_player_config_track">track</label>
+        <%= f.text_field "track", :class => 'textbox', :maxlength => 10 %>
+      </p>
+      <p>
+        <label for="audio_player_config_border">border</label>
+        <%= f.text_field "border", :class => 'textbox', :maxlength => 10 %>
+      </p>
+      <p>
+        <label for="audio_player_config_loader">loader</label>
+        <%= f.text_field "loader", :class => 'textbox', :maxlength => 10 %>
+      </p>
+      <p>
+        Loop:
+        <%= f.radio_button "loop", "no" %>
+        <label for="audio_player_config_loop_no">no</label>
+        <%= f.radio_button "loop", "yes" %>
+        <label for="audio_player_config_loop_yes">yes</label>
+        <%# TODO: make radio button selected in db state %>
+      </p>
+      <p>
+        Autostart:
+        <%= f.radio_button "autostart", "no" %>
+        <label for="audio_player_config_autostart_no">no</label>
+        <%= f.radio_button "autostart", "yes" %>
+        <label for="audio_player_config_autostart_yes">yes</label>
+        <%# TODO: make radio button selected in db state %>
+      </p>
+    </div>
+  </div>
+  
+  <p class="buttons">
+    <%= save_model_button(@audio_player_config) %>
+    <%= save_model_and_continue_editing_button(@audio_player_config) %>
+    or 
+    <%= link_to "Cancel", {:action => :index} %>
+  </p>
+<% end -%>
+
+
+<pre><code>
+# loop: "no"
+# autostart: "no"
+</code></pre>

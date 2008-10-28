@@ -14,7 +14,13 @@ class AudioPlayerExtension < Radiant::Extension
       audio.audio_reorder         'admin/audio/reorder',      :action => 'reorder'
       audio.audio_update_order    'admin/audio/update_order', :action => 'update_order'
     end
-
+    
+    map.with_options(:controller => 'admin/audio_player_config') do |config|
+      config.audio_player_config_index  'admin/audio_player_config',            :action => 'index'
+      config.audio_player_config_new    'admin/audio_player_config/new',        :action => 'new'
+      config.audio_player_config_edit   'admin/audio_player_config/edit/:id',   :action => 'edit'
+      config.audio_player_config_remove 'admin/audio_player_config/remove/:id', :action => 'remove'
+    end
 
   end
 
@@ -22,7 +28,7 @@ class AudioPlayerExtension < Radiant::Extension
     Inflector.inflections do |inflect|
       inflect.uncountable "audio" # cause 'audios' just sounds wrong!
     end
-    load_configuration
+    # load_configuration
     admin.tabs.add "Audio", "/admin/audio", :after => "Layouts", :visibility => [:all]
     Page.send :include, AudioTags
     AudioPage
