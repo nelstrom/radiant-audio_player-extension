@@ -1,6 +1,6 @@
 Config form:
 ✓ accept #000 or #000000 or 0xaabbcc formats
-
+- on the form, use #abcdef format always
 
 
 Get rid of:
