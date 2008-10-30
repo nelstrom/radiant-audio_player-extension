@@ -1,19 +1,15 @@
 module HexColors
   def hex_colors(*symbols)
     symbols.each do |symbol|
-      name = symbol.to_s
       class_eval <<-EOS, __FILE__, __LINE__
         def #{symbol}_hex
-          puts "name: "+ #{name}
-          value = value_or_default(#{name})
-          puts "value:" + value if value
-          if value =~ /^(0x|#)([0-9A-Fa-f]{3,6})/
+          if value_or_default(:#{symbol}) =~ /^(0x|#)([0-9A-Fa-f]{3,6})/
             "#" + $2
           end
         end
         def #{symbol}_hex=(input)
           if input =~ /^(0x|#)([0-9A-Fa-f]{3,6})/
-            self[#{name}] = "0x" + $2
+            self[:#{symbol}] = "0x" + $2
           end
         end
       EOS
