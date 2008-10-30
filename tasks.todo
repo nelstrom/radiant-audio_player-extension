@@ -1,6 +1,8 @@
 Config form:
 ✓ accept #000 or #000000 or 0xaabbcc formats
-- on the form, use #abcdef format always
+✓ on the form, use #abcdef format always
+
+Take a look at MEMOIZE macros in latest rails 2.2
 
 
 Get rid of:
