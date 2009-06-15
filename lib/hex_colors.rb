@@ -1,20 +1,28 @@
 module HexColors
-  def hex_colors(*symbols)
-    symbols.each do |symbol|
-      class_eval <<-EOS, __FILE__, __LINE__
-        def #{symbol}_hex
-          if value_or_default(:#{symbol}) =~ /^(0x|#)([0-9A-Fa-f]{3,6})/
-            "#" + $2
+  
+  def self.included(base)
+    base.extend ClassMethods
+  end
+  
+  module ClassMethods
+    def hex_colors(*symbols)
+      symbols.each do |symbol|
+        class_eval <<-EOS, __FILE__, __LINE__
+          def #{symbol}_hex
+            if value_or_default(:#{symbol}) =~ /^(0x|#)([0-9A-Fa-f]{3,6})/
+              "#" + $2
+            end
           end
-        end
-        def #{symbol}_hex=(input)
-          if input =~ /^(0x|#)([0-9A-Fa-f]{3,6})/
-            self[:#{symbol}] = "0x" + $2
+          def #{symbol}_hex=(input)
+            if input =~ /^(0x|#)([0-9A-Fa-f]{3,6})/
+              self[:#{symbol}] = "0x" + $2
+            end
           end
-        end
-      EOS
+        EOS
+      end
     end
   end
+
   def value_or_default(column)
     defaults = {
       :bg => "0xf8f8f8",
