@@ -7,19 +7,17 @@
 
 
 <script type="text/javascript" charset="utf-8">
-  // $(document).ready(function() {
-  //   $('#colorpicker').farbtastic('#color');
-  // });
+
   $(document).ready(function() {
     $('#demo').hide();
     var f = $.farbtastic('#picker');
     var p = $('#picker').css('opacity', 0.25);
     var selected;
     $('.colorwell')
-      .each(function () { f.linkTo(this); $(this).css('opacity', 0.75); })
+      .each(function () { f.linkTo(this); $(this).css('opacity', 1); })
       .focus(function() {
         if (selected) {
-          $(selected).css('opacity', 0.75).removeClass('colorwell-selected');
+          $(selected).css('opacity', 1).removeClass('colorwell-selected');
         }
         f.linkTo(this);
         p.css('opacity', 1);
@@ -30,16 +28,29 @@
 
 
 <% if @audio_player_config.new_record? %>
-  <h1>New audio player</h1>
+  <h1>New audio player configuration</h1>
 <% else %>
-  <h1>Edit: <%= @audio_player_config.name %></h1>
+  <h1>Edit: <%= @audio_player_config.name %> audio player configuration</h1>
 <% end %>
 
 <% form_for :audio_player_config do |f| %>
-  <div class="form-area">
-    <div id="audio_player_config_form_area">
+  <div id="audio_player_config_form_area">
+    <div class="form-area">
       
-      <div id="picker"></div>
+      <div id="widgets">
+        <div id="picker"></div>
+        <div id="example">
+          <object type="application/x-shockwave-flash" data="/flash/audio_player/player.swf" id="audioplayer-example" height="24" width="290">
+            <param name="movie" value="/flash/audio_player/player.swf">
+            <param name="FlashVars" value="<%= admin_player_params('/flash/audio_player/example.mp3') %>">
+            <param name="quality" value="high">
+            <param name="menu" value="false">
+            <param name="wmode" value="transparent">
+          </object>
+          <p>Press "Save and Continue" to apply colors.</p>
+        </div>
+      </div>
+      
       <ul id="colour_fields">
         <li>
           <label for="audio_player_config_leftbg">Left background</label>
@@ -93,20 +104,23 @@
           <%= f.text_field "loader_hex", :class => 'textbox colorwell', :maxlength => 10 %>
         </li>
       </ul>
-      <p>
-        Loop:
-        <%= f.radio_button "loop", false %>
-        <label for="audio_player_config_loop_no">no</label>
-        <%= f.radio_button "loop", true %>
-        <label for="audio_player_config_loop_yes">yes</label>
-      </p>
-      <p>
-        Autostart:
-        <%= f.radio_button "autostart", false %>
-        <label for="audio_player_config_autostart_no">no</label>
-        <%= f.radio_button "autostart", true %>
-        <label for="audio_player_config_autostart_yes">yes</label>
-      </p>
+      
+      <ul id="extra_options">
+        <li>
+          Loop:
+          <%= f.radio_button "loop", false %>
+          <label for="audio_player_config_loop_no">no</label>
+          <%= f.radio_button "loop", true %>
+          <label for="audio_player_config_loop_yes">yes</label>
+        </li>
+        <li>
+          Autostart:
+          <%= f.radio_button "autostart", false %>
+          <label for="audio_player_config_autostart_no">no</label>
+          <%= f.radio_button "autostart", true %>
+          <label for="audio_player_config_autostart_yes">yes</label>
+        </li>
+      </ul>
     </div>
   </div>
   

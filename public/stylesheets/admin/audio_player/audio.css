@@ -92,16 +92,73 @@ ul#audio_tracks .icon {
 /* Audio Player Config Form stuff */
 ul#colour_fields{
   float: left;
-  width:100%;
+  width:750px;
   margin: 0px;
   list-style-type: none;
   }
 ul#colour_fields li{
   float: left;
-  width:30%;
+  width: 250px;
   margin-bottom: 10px;
   }
 ul#colour_fields li label{
   margin-bottom: 3px;
   display: block;
   }
+ul#colour_fields li input{
+  padding: 0.5em 1em 0.25em;
+  font-family: "Courier New",Courier,monospace;
+  font-weight: bold;
+  text-align: right;
+  width:75%;
+  border: 2px solid #F5F1E2;
+}
+ul#colour_fields li input.colorwell-selected{
+  font-style: italic;
+  border: 2px dotted #F5F1E2;
+}
+
+#audio_player_config_form_area{
+  margin: 0 0px;
+  
+}
+#audio_player_config_form_area .form-area{
+  padding: 20px;
+  margin: 0;
+  width: auto;
+}
+#audio_player_config_form_area p{
+  clear: both;
+}
+
+#widgets{
+  margin: 20px 40px;
+  width:750px;
+  height:220px;
+  position: relative;
+}
+#picker{
+  position: absolute;
+  left:8px;
+}
+#example{
+  position: absolute;
+  left:250px;
+  top:90px;
+}
+#content #example p{
+  margin-top: 12px;
+  font-size: 92%;
+}
+
+#extra_options{
+  clear: both;
+  margin: 0px;
+  padding: 20px 40px;
+  list-style-type: none;
+}
+#extra_options li{
+  float: left;
+  width: 250px;
+}
+
