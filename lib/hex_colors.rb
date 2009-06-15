@@ -24,24 +24,30 @@ module HexColors
   end
 
   def value_or_default(column)
-    defaults = {
-      :bg => "0xf8f8f8",
-      :leftbg => "0xeeeeee",
-      :lefticon => "0x666666",
-      :rightbg => "0xcccccc",
-      :rightbghover => "0x999999",
-      :righticon => "0x666666",
-      :righticonhover => "0xffffff",
-      :text => "0x666666",
-      :slider => "0x666666",
-      :track => "0xFFFFFF",
-      :border => "0x666666",
-      :loader => "0x9FFFB8"
-    }
     if value = self[column] and !value.blank?
       value
     else
       defaults[column]
     end
   end
+  
+  private
+  
+  def defaults
+    {
+      :bg             => "0xf8f8f8",
+      :leftbg         => "0xeeeeee",
+      :lefticon       => "0x666666",
+      :rightbg        => "0xcccccc",
+      :rightbghover   => "0x999999",
+      :righticon      => "0x666666",
+      :righticonhover => "0xffffff",
+      :text           => "0x666666",
+      :slider         => "0x666666",
+      :track          => "0xFFFFFF",
+      :border         => "0x666666",
+      :loader         => "0x9FFFB8"
+    }
+  end
+  
 end
