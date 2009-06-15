@@ -95,19 +95,17 @@
       </ul>
       <p>
         Loop:
-        <%= f.radio_button "loop", "no" %>
+        <%= f.radio_button "loop", false %>
         <label for="audio_player_config_loop_no">no</label>
-        <%= f.radio_button "loop", "yes" %>
+        <%= f.radio_button "loop", true %>
         <label for="audio_player_config_loop_yes">yes</label>
-        <%# TODO: make radio button selected in db state %>
       </p>
       <p>
         Autostart:
-        <%= f.radio_button "autostart", "no" %>
+        <%= f.radio_button "autostart", false %>
         <label for="audio_player_config_autostart_no">no</label>
-        <%= f.radio_button "autostart", "yes" %>
+        <%= f.radio_button "autostart", true %>
         <label for="audio_player_config_autostart_yes">yes</label>
-        <%# TODO: make radio button selected in db state %>
       </p>
     </div>
   </div>
@@ -119,9 +117,3 @@
     <%= link_to "Cancel", {:action => :index} %>
   </p>
 <% end -%>
-
-
-<pre><code>
-# loop: "no"
-# autostart: "no"
-</code></pre>
